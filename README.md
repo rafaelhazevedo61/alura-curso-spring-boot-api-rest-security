@@ -9,3 +9,10 @@
 7) git pull origin master
   
 Pronto, os arquivos do repositório agora estão em sua máquina! Basta importar para a IDE de sua preferência e começar a usar.
+
+# TECNOLOGIAS USADAS #
+
+1) Java
+2) Framework - Spring Boot
+3) Repositório de Dependências - Maven
+4) Servidor de Aplicação - TomCat
