@@ -13,10 +13,10 @@ import io.jsonwebtoken.SignatureAlgorithm;
 
 @Service
 public class TokenService {
-
+	
 	@Value("${forum.jwt.expiration}")
 	private String expiration;
-
+	
 	@Value("${forum.jwt.secret}")
 	private String secret;
 
@@ -24,8 +24,9 @@ public class TokenService {
 		Usuario logado = (Usuario) authentication.getPrincipal();
 		Date hoje = new Date();
 		Date dataExpiracao = new Date(hoje.getTime() + Long.parseLong(expiration));
-
-		return Jwts.builder().setIssuer("API do Fórum da Alura")
+		
+		return Jwts.builder()
+				.setIssuer("API do Fórum da Alura")
 				.setSubject(logado.getId().toString())
 				.setIssuedAt(hoje)
 				.setExpiration(dataExpiracao)
@@ -34,7 +35,6 @@ public class TokenService {
 	}
 
 	public boolean isTokenValido(String token) {
-
 		try {
 			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
 			return true;
@@ -44,11 +44,8 @@ public class TokenService {
 	}
 
 	public Long getIdUsuario(String token) {
-		
 		Claims claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token).getBody();
 		return Long.parseLong(claims.getSubject());
-
-		
 	}
 
 }
